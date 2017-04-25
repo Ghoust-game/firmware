@@ -1,6 +1,21 @@
 /*
 
- Version 1.0 - finally.
+Version 1.0 - finally.
+
+
+Copyright 2017 Florian 'overflo' Bittner
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, 
+including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, 
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
  
  August, 10   2016 - overflo
  complete rewrite for ESP8266 
@@ -22,6 +37,11 @@ WiFiManager         //https://github.com/tzapu/WiFiManager
 ArduinoJson       //https://github.com/bblanchon/ArduinoJson
 
 
+iDocumentation on how to build this is found in the wiki
+
+https://github.com/Ghoust-game/firmware/wiki
+
+
 ///////////// REMARKS
 
 The whole sound implementation relies on delay() and should therefor not be used DURING a game but only on init and end of a game when there are no sensor values to be read.
@@ -38,7 +58,7 @@ wontfix :(
 
 --
 
-the analogRead() in the battery chack breaks the setup.
+the analogRead() in the battery check breaks the setup.
 might be a hardware issue due to a wrong voltage divider, needs investigation.
 
 
