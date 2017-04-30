@@ -98,6 +98,9 @@ void setup()
   Serial.println("");
   Serial.println("<<< START >>>");
 
+  leds_setup();
+
+
   battery_setup();
   
   createUniqueSystemName();
@@ -108,7 +111,7 @@ void setup()
   
   sound_setup(); //ok
 
-  leds_setup();
+
 
   wifi_setup();
   

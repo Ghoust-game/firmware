@@ -108,6 +108,11 @@ void callback(char* topic, byte* payload, unsigned int length)
   Serial.print(topic);
   Serial.println("] ");
 
+
+  // disabling all effects (the default is bluepulse until we receive our first MQTT update)
+  if(enabled_led_effect == EFFECT_BLUEPULSE) enabled_led_effect =0;
+
+
   //current_message='';
 
   for(int i=0;i<length;i++) current_message[i] = payload[i];

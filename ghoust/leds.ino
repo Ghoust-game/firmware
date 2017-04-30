@@ -1,5 +1,19 @@
 #include <stdio.h>
 #include <string.h>
+
+
+
+
+
+//EFFECTS
+#define EFFECT_RAINBOW 1
+#define EFFECT_BLUEPULSE 2
+
+
+
+
+
+
 const int R_PIN = 13;   // D7 GPIO 13
 const int G_PIN = 12;   // D6 GPIO 12
 const int B_PIN = 14;   // D5 GPIO 14
@@ -18,12 +32,9 @@ int current_b =0 ;
 Ticker ledticker;
 
 
-//EFFECTS
-const int EFFECT_RAINBOW=1;
-
 
 // set via MQTT preset
-int enabled_led_effect=0;
+int enabled_led_effect=EFFECT_BLUEPULSE;
 
 
 
@@ -37,11 +48,16 @@ void leds_setup()
   //analogWriteFreq(200);
 
 
+
+
   pinMode(R_PIN,OUTPUT);
   pinMode(G_PIN,OUTPUT);
   pinMode(B_PIN,OUTPUT);
   
-  leds_off();
+   set_led(get_color(0),get_color(0),get_color(512));
+
+
+
 
   
 }
@@ -80,6 +96,12 @@ void leds_work()
  //      ticker.attach_ms(40, effect_rainbow);
      effect_rainbow();
    break;
+
+   case EFFECT_BLUEPULSE:
+     effect_bluepulse();
+   break;
+  
+  
   }
 
  }
@@ -256,7 +278,7 @@ int get_color(int val)
 
 
 // needs substraction/inversion if we run directly on a led, or no substruction if we use a high power led siwth FETs
-//  val=1023-val;  
+  val=1023-val;  
   return  val;
 }
 
@@ -270,6 +292,41 @@ int get_color(int val)
 
 
 ////////// EFFECTS
+
+
+
+//BLUEPULSE
+
+//int last_call_effect_bluepulse=0;
+int bluepulsecounter = 0;
+
+void effect_bluepulse()
+{
+
+/*
+  //update this effect every ~10 milliseconds
+  if(!last_call_effect_bluepulse) last_call_effect_bluepulse=millis();
+  if((millis()-last_call_effect_bluepulse)<4) return;
+  last_call_effect_bluepulse=0;
+*/
+
+
+  bluepulsecounter++;
+  if(bluepulsecounter==2047) bluepulsecounter=0;
+
+   // update the colors for a rainbowfade
+  if(bluepulsecounter>1023)
+    set_led(get_color(0),get_color(0),get_color(2047-bluepulsecounter));   
+  else
+    set_led(get_color(0),get_color(0),get_color(bluepulsecounter));
+
+
+
+
+}
+
+
+
 
 
 
