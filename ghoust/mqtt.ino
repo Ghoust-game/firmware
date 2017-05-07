@@ -110,7 +110,11 @@ void callback(char* topic, byte* payload, unsigned int length)
 
 
   // disabling all effects (the default is bluepulse until we receive our first MQTT update)
-  if(enabled_led_effect == EFFECT_BLUEPULSE) enabled_led_effect =0;
+  if(enabled_led_effect == EFFECT_BLUEPULSE) 
+  {
+    Serial.println("Disable currently running LED effect- because we received some MQTT message and the booting is complete");
+    enabled_led_effect =0;
+  }
 
 
   //current_message='';

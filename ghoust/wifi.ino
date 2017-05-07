@@ -9,8 +9,6 @@
 #include <ArduinoJson.h>          //https://github.com/bblanchon/ArduinoJson
 
 
-#define RESET_SETTINGS 0
-
 
 
 //flag for saving data

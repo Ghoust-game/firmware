@@ -54,7 +54,7 @@ void leds_setup()
   pinMode(G_PIN,OUTPUT);
   pinMode(B_PIN,OUTPUT);
   
-   set_led(get_color(0),get_color(0),get_color(512));
+   set_led(0,0,512);
 
 
 
@@ -277,8 +277,13 @@ int get_color(int val)
 {
 
 
-// needs substraction/inversion if we run directly on a led, or no substruction if we use a high power led siwth FETs
-  val=1023-val;  
+  // needs substraction/inversion if we run directly on a led (default)
+  // OR
+  // no substruction if we use a high power led siwth FETs
+  
+   
+   val=1023-val;  
+  
   return  val;
 }
 
@@ -316,9 +321,9 @@ void effect_bluepulse()
 
    // update the colors for a rainbowfade
   if(bluepulsecounter>1023)
-    set_led(get_color(0),get_color(0),get_color(2047-bluepulsecounter));   
+    set_led(0,0,2047-bluepulsecounter);   
   else
-    set_led(get_color(0),get_color(0),get_color(bluepulsecounter));
+    set_led(0,0,bluepulsecounter);
 
 
 
@@ -362,7 +367,7 @@ void effect_rainbow()
 
 
 
-  set_led(get_color(wR),get_color(wG),get_color(wB));
+  set_led(wR,wG,wB);
 
 
 

@@ -77,6 +77,12 @@ might be a hardware issue due to a wrong voltage divider, needs investigation.
 
 
 
+
+// dev setting, clears storage files on "eeprom" space. good for resetting info from the wifimanager webinterafce
+#define RESET_SETTINGS 0
+
+
+
 // FOR MQTT but also used in wifiManager setup
 //define your default values here, if there are different values in config.json, they are overwritten.
 char mqtt_server[40];

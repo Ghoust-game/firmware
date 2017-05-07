@@ -3,7 +3,15 @@
 
 #include <OneButton.h>
 
-#define BUTTON_PIN    2 //D4  GPIO2 (builtin led)
+
+// HW design <=0.3
+//#define BUTTON_PIN    2 //D4  GPIO2 (builtin led)
+
+
+// HW design >0.3
+#define BUTTON_PIN    0 // gPIO0 == FLASH
+
+
 OneButton button(BUTTON_PIN, true);
 
 //////////////////////

@@ -119,6 +119,18 @@ uint32_t lastwarn=0;
 
 void accelerometer_work()
 {
+
+
+   print_orientation();
+
+
+
+
+
+
+
+
+  
   if(!update_readings()) return;
 
   
@@ -264,7 +276,6 @@ bool shock_3d(float threshold2)
 // NOT SED BUT MIGHT BE INTERESTING FOR REFERENCE LATER
 
 
-/*
 
 
 
@@ -279,7 +290,7 @@ byte lastpos =0;
 // This function demonstrates how to use the accel.readPL()
 // function, which reads the portrait/landscape status of the
 // sensor.
-void printOrientation()
+void print_orientation()
 {
 
 
@@ -325,7 +336,7 @@ void printOrientation()
 
 
 
-
+/*
 
 
 void printAcceleration()
