@@ -26,6 +26,50 @@ float warn_threshold = 2.0;
 
 
 
+
+
+
+//// SHOCK DETECTION
+
+
+float shock2;
+//integrated deltas of x,y,z
+float dx, dy, dz; 
+// delta of time
+uint32_t  dt;
+
+
+//temporary stuff
+float oldx = 0, oldy = 0, oldz = 0;
+unsigned long oldt;
+
+
+
+uint32_t lastshock=0;
+uint32_t lastwarn=0;
+
+
+
+ //       acc.setSensitivity(HIGH);
+
+
+
+int measurecounter = 0;
+const int integrate_counter=50;
+
+
+float x=0;
+float y=0;
+float z=0;
+
+
+
+
+
+
+
+
+
 void accelerometer_setup()
 {
   
@@ -52,11 +96,23 @@ void accelerometer_setup()
 void accelerometer_threshold_handle_request(char* message, int outwarn)
 {
 
+
+  if(strstr(message,"RESET"))
+  {
+   Serial.println("RESETTING acclerometer");
+   
+   dx, dy, dz, oldx, oldy, oldz, x, y, z = 0.0;
+   dt,oldt =0;
+    
+
+   return;
+  }
+
+
   
  Serial.println("setting THRESHOLD");
  Serial.println(message);
 
- 
  if(outwarn)
  {
     Serial.print("setting OUT: ");
@@ -91,30 +147,6 @@ void accelerometer_threshold_handle_request(char* message, int outwarn)
 
 
 
-
-
-
-
-
-
-//// SHOCK DETECTION
-
-
-float shock2;
-//integrated deltas of x,y,z
-float dx, dy, dz; 
-// delta of time
-uint32_t  dt;
-
-
-//temporary stuff
-float oldx = 0, oldy = 0, oldz = 0;
-unsigned long oldt;
-
-
-
-uint32_t lastshock=0;
-uint32_t lastwarn=0;
 
 
 void accelerometer_work()
@@ -177,18 +209,6 @@ void accelerometer_work()
 
 
 
-
- //       acc.setSensitivity(HIGH);
-
-
-
-int measurecounter = 0;
-const int integrate_counter=50;
-
-
-float x=0;
-float y=0;
-float z=0;
 
 
  bool update_readings() 

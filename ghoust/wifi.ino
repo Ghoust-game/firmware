@@ -11,7 +11,8 @@
 
 
 
-//flag for saving data
+
+//flag for saving datam
 bool shouldSaveConfig = false;
 
 //callback notifying us of the need to save config
@@ -58,7 +59,9 @@ void wifi_setup()
 
           strcpy(mqtt_server, json["mqtt_server"]);
           strcpy(mqtt_port, json["mqtt_port"]);
+          strcpy(device_name, json["device_name"]);
 
+          
         } else {
           Serial.println("failed to load json config");
         }
@@ -80,6 +83,7 @@ void wifi_setup()
   // id/name placeholder/prompt default length
   WiFiManagerParameter custom_mqtt_server("server", "mqtt server", mqtt_server, 40);
   WiFiManagerParameter custom_mqtt_port("port", "mqtt port", mqtt_port, 5);
+  WiFiManagerParameter custom_device_name("device_name", "device name", device_name, 40);
 
 
   //WiFiManager
@@ -97,7 +101,9 @@ void wifi_setup()
   //add all your parameters here
   wifiManager.addParameter(&custom_mqtt_server);
   wifiManager.addParameter(&custom_mqtt_port);
+  wifiManager.addParameter(&custom_device_name);
 
+  
   //reset settings - for testing
   if(RESET_SETTINGS)  wifiManager.resetSettings();
 
@@ -138,7 +144,7 @@ void wifi_setup()
   //read updated parameters
   strcpy(mqtt_server, custom_mqtt_server.getValue());
   strcpy(mqtt_port, custom_mqtt_port.getValue());
-
+  strcpy(device_name, custom_device_name.getValue());
 
 
 
@@ -149,6 +155,7 @@ void wifi_setup()
     JsonObject& json = jsonBuffer.createObject();
     json["mqtt_server"] = mqtt_server;
     json["mqtt_port"] = mqtt_port;
+    json["device_name"] = device_name;
 
     File configFile = SPIFFS.open("/config.json", "w");
     if (!configFile) {

@@ -89,6 +89,14 @@ char mqtt_server[40];
 char mqtt_port[5] = "1883";
 
 
+
+// name of the device
+// a custom device name that one can assign on the webinterface fE "peters phallic apperatus"
+char device_name[40];
+
+
+
+// something like GHOUST_13_37 (last two digits of MAC)
 char sysname[13] = {};
 
 
@@ -125,8 +133,12 @@ void setup()
 
   accelerometer_setup();   // this breaks sometimes.. why? seems to be a hardware issue with the breakoutboard after several reeboots. usually everything works again after switching off the device for some time (over night)
 
-  
-  
+  Serial.println("Setup finished, Device configured successfully");
+  Serial.print("SYSNAME (ID): ");  
+  Serial.println(sysname);    
+  Serial.print("DEVICE NAME (custom): ");  
+  Serial.println(device_name);   
+
 }
 
 
@@ -148,9 +160,6 @@ void loop()
 
  // maybe if we switch to asynchronous sound playback..
  //sound_work();
- 
- // printOrientation();
-  //  printAcceleration();
 
   accelerometer_work();
 

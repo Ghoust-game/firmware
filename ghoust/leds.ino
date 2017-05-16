@@ -278,11 +278,12 @@ int get_color(int val)
 
 
   // needs substraction/inversion if we run directly on a led (default)
+  val=1023-val;  
+  
   // OR
   // no substruction if we use a high power led siwth FETs
   
-   
-   val=1023-val;  
+ 
   
   return  val;
 }
