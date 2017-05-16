@@ -6,9 +6,9 @@
 
 
 //EFFECTS
-#define EFFECT_RAINBOW 1
+#define EFFECT_COLORSTROBE 1
 #define EFFECT_BLUEPULSE 2
-
+#define EFFECT_RAINBOW 3
 
 
 
@@ -92,6 +92,15 @@ void leds_work()
  {
   switch(enabled_led_effect)
   {
+
+
+
+   case EFFECT_COLORSTROBE:
+     effect_colorstrobe();
+   break;
+
+
+    
    case EFFECT_RAINBOW:
  //      ticker.attach_ms(40, effect_rainbow);
      effect_rainbow();
@@ -301,6 +310,44 @@ int get_color(int val)
 
 
 
+
+
+
+
+uint32_t colorstrobe_last = 0;
+int colorstrobe_state=0;
+
+void effect_colorstrobe()
+{
+
+
+  //update this effect every ~10 milliseconds
+  if(!colorstrobe_last) colorstrobe_last=millis();
+  if((millis()-colorstrobe_last)<60) return;
+  colorstrobe_last=0;
+
+if(colorstrobe_state)
+{
+    set_led(0,1023,1023);  
+    colorstrobe_state=0; 
+}
+else
+ {
+  set_led(0,0,0);
+  colorstrobe_state=1; 
+ }
+
+
+
+
+}
+
+
+
+
+
+
+
 //BLUEPULSE
 
 //int last_call_effect_bluepulse=0;
@@ -330,6 +377,10 @@ void effect_bluepulse()
 
 
 }
+
+
+
+
 
 
 
